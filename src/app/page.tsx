@@ -16,7 +16,7 @@ export default async function Home() {
     <div className="max-w-7xl mx-auto pt-8 px-8 xl:p-0">
       <div
         className="
-
+      pt-8
       grid grid-cols-1 
       sm:grid-cols-2 
       lg:grid-cols-4 gap-10
@@ -25,7 +25,6 @@ export default async function Home() {
           <Product key={product.id} product={product}></Product>
         ))}
       </div>
-      <h1>senacx</h1>
     </div>
   );
 }

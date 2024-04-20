@@ -1,3 +1,4 @@
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 
 export const Navbar = () => {
@@ -9,7 +10,18 @@ export const Navbar = () => {
       >
         Senac store
       </Link>
-      <ul></ul>
+      <div className="flex items-center gap-8">
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <SignedOut>
+          <SignInButton mode="modal">
+            <button className="uppercase rounded-md border-gray-400 px-3 py-2">
+              Sign In
+            </button>
+          </SignInButton>
+        </SignedOut>
+      </div>
     </nav>
   );
 };
