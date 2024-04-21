@@ -1,6 +1,8 @@
 import { ProductType } from "@/types/ProductType";
 import { ProductImage } from "./ProductImage";
 import { formatPrice } from "@/lib/utils";
+import { useStore } from "zustand";
+import AddCart from './AddCart';
 
 type ProductProps = {
   product: ProductType;
@@ -16,9 +18,7 @@ export const Product = ({ product }: ProductProps) => {
         <p className="w-40 truncate">{product.name}</p>
         <p className="text-md text-teal-300"> {formatPrice(product.price)}</p>
       </div>
-      <button className="rounded-md bg-teal-600 text-white px-3.5 py-2.5 text-sm text-center">
-        Add to cart
-      </button>
+     <AddCart product={product}/>
     </div>
   );
 };
