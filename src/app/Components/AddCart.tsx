@@ -1,11 +1,12 @@
 "use client";
 import { useCartStore } from "@/store";
 import { ProductType } from "@/types/ProductType";
+import { useRouter } from "next/navigation";
 import Swal from "sweetalert2";
 
 export default function Product({ product }: { product: ProductType }) {
   const { addProduct } = useCartStore();
-
+  const router = useRouter();
   const handleAddToCart = () => {
     addProduct(product);
     Swal.fire({
@@ -16,9 +17,11 @@ export default function Product({ product }: { product: ProductType }) {
       timer: 1000,
     });
 
-    {/* Redir to root " / " after add a item on cart */}
+    {
+      /* Redir to root " / " after add a item on cart */
+    }
     setTimeout(() => {
-      window.location.href = "/";
+      router.push("/");
     }, 1500);
   };
 
