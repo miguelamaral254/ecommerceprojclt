@@ -6,6 +6,9 @@ import { useStore } from "zustand";
 
 export default function CartDrawer() {
   const useStore = useCartStore();
+  const totalPrice = useStore.cart.reduce((acc,item)=> {
+    return acc + item.price! * item.quantity!;
+  },0)
   return (
     <>
       <div
@@ -40,18 +43,29 @@ export default function CartDrawer() {
                 </p>
                 <button
                   onClick={() => useStore.addProduct(item)}
-                  className="py-1 px2 border rounded-md mt-2 text-sm mr-1"
+                  className="py-1 px-2 border rounded-md mt-2 text-sm mr-1"
                 >
                   Add
                 </button>
                 <button 
                 onClick={()=> useStore.removeFromCart(item)}
-                className="py-1 px2 border rounded-md mt-2 text-sm mr-1">
+                className="py-1 px-2 border rounded-md mt-2 text-sm mr-1">
                   Remove
                 </button>
               </div>
             </div>
           ))}
+
+          {
+            useStore.cart.length > 0 && (
+              <div>
+                <p className="text-teal-600 font-bold">Total: {formatPrice(totalPrice)}</p>
+              <button className="w-full rounded-md bg-teal-600   text-white py-2 mt-2">Check out</button>
+              </div>
+
+
+            )
+          }
         </div>
       </div>
     </>

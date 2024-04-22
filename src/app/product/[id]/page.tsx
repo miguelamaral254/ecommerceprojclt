@@ -45,7 +45,9 @@ export default async function ProductPage({
             <p className="text-sm">{product.description}</p>
         </div>
         <AddCart product={product}/>
-        <div></div>
+        <div>
+          
+        </div>
       </div>
     </div>
   );
