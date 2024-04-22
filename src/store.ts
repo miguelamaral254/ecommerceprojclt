@@ -1,12 +1,11 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { ProductType } from "./types/ProductType";
-import Product from "./app/Components/AddCart";
 
 type CartState = {
   cart: ProductType[];
   addProduct: (product: ProductType) => void;
-  //removeFromCart: (productID: string) => void;
+  removeFromCart: (product: ProductType) => void;
   isOpen: boolean;
   toggleCart: () => void;
 };
@@ -27,6 +26,22 @@ export const useCartStore = create<CartState>()(
             return { cart: updateCart };
           } else {
             return { cart: [...state.cart, { ...item, quantity: 1 }] };
+          }
+        }),
+      removeFromCart: (item) =>
+        set((state) => {
+          const existingProduct = state.cart.find((p) => p.id === item.id);
+          if (existingProduct && existingProduct.quantity! > 1) {
+            const updateCart = state.cart.map((p) => {
+              if (p.id === item.id) {
+                return { ...p, quantity: p.quantity! - 1 };
+              }
+              return p;
+            });
+            return { cart: updateCart };
+          } else {
+            const filterdCart = state.cart.filter((p) => p.id !== item.id);
+            return { cart: filterdCart };
           }
         }),
       isOpen: false,

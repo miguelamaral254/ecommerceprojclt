@@ -1,5 +1,5 @@
 import { ProductType } from "@/types/ProductType";
-import { Product } from "./Components/Product";
+import  Product  from "./Components/Product";
 import Stripe from "stripe";
 
 async function getProducts(): Promise<ProductType[]> {
