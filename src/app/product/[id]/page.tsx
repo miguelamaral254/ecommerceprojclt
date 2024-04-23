@@ -1,7 +1,7 @@
 import { ProductImage } from "@/app/Components/ProductImage";
 import { formatPrice } from "@/lib/utils";
-import AddCart from '../../Components/AddCart'
-import Stripe from "stripe";
+import AddCart from "../../Components/AddCart";
+import { stripe } from "@/lib/stripe";
 
 type ProductPageProps = {
   params: {
@@ -10,9 +10,6 @@ type ProductPageProps = {
 };
 
 async function getProduct(id: string) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: "2024-04-10",
-  });
   const product = await stripe.products.retrieve(id);
   const price = await stripe.prices.list({
     product: product.id,
@@ -36,18 +33,16 @@ export default async function ProductPage({
 
       <div className="flex flex-col">
         <div className="pb-4">
-          <h1 className="text-2xl font-bold text-gray-400" > {product.name}</h1>
+          <h1 className="text-2xl font-bold text-gray-400"> {product.name}</h1>
           <h2 className="text-xl text-teal-600">
             {formatPrice(product.price)}
           </h2>
         </div>
         <div className="pb-4">
-            <p className="text-sm">{product.description}</p>
+          <p className="text-sm">{product.description}</p>
         </div>
-        <AddCart product={product}/>
-        <div>
-          
-        </div>
+        <AddCart product={product} />
+        <div></div>
       </div>
     </div>
   );

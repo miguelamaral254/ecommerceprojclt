@@ -1,7 +1,6 @@
 import { ProductType } from "@/types/ProductType";
 import { ProductImage } from "./ProductImage";
 import { formatPrice } from "@/lib/utils";
-import AddCart from "./AddCart";
 import Link from "next/link";
 
 type ProductProps = {
@@ -22,6 +21,6 @@ export default function Product({ product }: ProductProps) {
           Add to cart
         </button>
       </div>
-    </Link>     
+    </Link>
   );
 }
