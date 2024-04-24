@@ -19,11 +19,11 @@ export default function CartDrawer() {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="absolute bg-slate-600 right-0 top-0 w-1/3 h-screen p-12 overflow-y-scroll"
+          className="absolute bg-sky-900 right-0 top-0 w-1/3 h-screen p-12 overflow-y-scroll"
         >
           <button
             onClick={() => useStore.toggleCart()}
-            className="font-bold text-sm text-teal-600"
+            className="font-bold text-sm border border-gray-200 py-2 px-3 text-gray-200"
           >
             Go back
           </button>
@@ -42,7 +42,7 @@ export default function CartDrawer() {
                   <div>
                     <h2 className="w-22 truncate">{item.name}</h2>
                     <h2>Quantity : {item.quantity}</h2>
-                    <p className="text-teal-600 text-sm font-bold">
+                    <p className="text-teal-500 text-sm font-bold">
                       {formatPrice(item.price)}
                     </p>
                     <button

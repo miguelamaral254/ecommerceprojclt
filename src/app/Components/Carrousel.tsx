@@ -19,16 +19,16 @@ const Carousel = () => {
   const totalSlides = 3; // Número total de slides (substitua pelo número correto)
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full pt-20">
       <div className="overflow-hidden rounded-lg">
         <div
           className="flex transition-transform duration-300 ease-in-out"
           style={{ transform: `translateX(-${currentSlide * 100}%)` }}
         >
           {/* Cada slide é renderizado dentro de um contêiner separado */}
-          <div className="w-full h-64 bg-red-300">Slide 1</div>
-          <div className="w-full h-64 bg-green-300">Slide 2</div>
-          <div className="w-full h-64 bg-blue-300">Slide 3</div>
+          <div className="flex items-center justify-center w-full h-64 bg-red-300">Template Slide 1</div>
+          <div className="flex items-center justify-center w-full h-64 bg-green-300">Template Slide 2</div>
+          <div className="flex items-center justify-center w-full h-64 bg-blue-300">Template Slide 3</div>
         </div>
       </div>
       <button

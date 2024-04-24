@@ -29,7 +29,7 @@ export default function Cart() {
         </svg>
         {/* Check empty cart */}
         {!isCartEmpty && (
-          <span className="bg-teal-600 text-sm font-bold rounded-full h-5 w-5 flex items-center justify-center absolute left-3 bottom-3">
+          <span className="bg-orange-600 text-white text-sm font-bold rounded-full h-5 w-5 flex items-center justify-center absolute left-3 bottom-3">
             {useStore.cart.length}
           </span>
         )}

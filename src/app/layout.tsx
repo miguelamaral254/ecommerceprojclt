@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={clsx(inter.className, "bg-gray-200")}>
+        <body className={clsx(inter.className, "bg-sky-900")}>
           <Hydrate>
             <Navbar />
             <Carousel/>

@@ -21,12 +21,12 @@ export default function CheckoutBtn({ totalPrice }: CheckoutBtnProps) {
   };
   return (
     <div>
-      <p className="text-teal-600 font-bold">
+      <p className="text-teal-500 font-bold">
         Total: {formatPrice(totalPrice)}
       </p>
       <button
         onClick={() => handleCheckout()}
-        className="w-full rounded-md bg-teal-600   text-white py-2 mt-2"
+        className="w-full rounded-md bg-orange-500   text-white py-2 mt-2"
       >
         Check out
       </button>
