@@ -28,13 +28,13 @@ export default async function ProductPage({
 }: ProductPageProps) {
   const product = await getProduct(id);
   return (
-    <div className="flex flex-col bg-sky-900  md:flex-row items-center max-w-7xl mx-auto gap-8 p-10">
+    <div className="flex flex-col bg-sky-700/50  md:flex-row items-center max-w-7xl mx-auto gap-8 p-10">
       <ProductImage product={product} />
 
       <div className="flex flex-col">
         <div className="pb-4">
           <h1 className="text-2xl font-bold text-gray-100"> {product.name}</h1>
-          <h2 className="text-xl text-teal-600">
+          <h2 className="text-xl text-teal-500">
             {formatPrice(product.price)}
           </h2>
         </div>
