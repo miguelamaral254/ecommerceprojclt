@@ -5,6 +5,7 @@ import { Navbar } from "./Components/Navbar";
 import clsx from "clsx";
 import { ClerkProvider } from "@clerk/nextjs";
 import Hydrate from "./Components/Hydrate";
+import Carousel from "./Components/Carrousel";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,9 +21,10 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={clsx(inter.className, "bg-slate-700")}>
+        <body className={clsx(inter.className, "bg-gray-200")}>
           <Hydrate>
             <Navbar />
+            <Carousel/>
             <main className=" h-screen p-16">{children}</main>
           </Hydrate>
         </body>
