@@ -1,48 +1,107 @@
 "use client";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Carousel = () => {
-  const [currentSlide, setCurrentSlide] = useState(0); // Estado para controlar o slide atual
+  const slides = [
+    {
+      id: 1,
+      bgColor: "bg-black",
+    },
+    {
+      id: 2,
+      bgColor: "bg-blue-500",
+    },
+    {
+      id: 3,
+      bgColor: "bg-green-500",
+    },
+  ];
 
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? totalSlides - 1 : prevSlide - 1
-    );
-  };
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [showButtons, setShowButtons] = useState(false);
 
   const nextSlide = () => {
     setCurrentSlide((prevSlide) =>
-      prevSlide === totalSlides - 1 ? 0 : prevSlide + 1
+      prevSlide === slides.length - 1 ? 0 : prevSlide + 1
     );
   };
 
-  const totalSlides = 3; // Número total de slides (substitua pelo número correto)
+  const prevSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? slides.length - 1 : prevSlide - 1
+    );
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentSlide]);
 
   return (
-    <div className="relative w-full pt-20">
-      <div className="overflow-hidden rounded-lg">
-        <div
-          className="flex transition-transform duration-300 ease-in-out"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {/* Cada slide é renderizado dentro de um contêiner separado */}
-          <div className="flex items-center justify-center w-full h-64 bg-red-300">Template Slide 1</div>
-          <div className="flex items-center justify-center w-full h-64 bg-green-300">Template Slide 2</div>
-          <div className="flex items-center justify-center w-full h-64 bg-blue-300">Template Slide 3</div>
+    <div
+      className="w-full h-96 relative"
+      onMouseEnter={() => setShowButtons(true)}
+      onMouseLeave={() => setShowButtons(false)}
+    >
+      <div className="slider w-full h-full overflow-hidden">
+        <div className="slides w-full h-full flex">
+          {slides.map((slide, index) => (
+            <div
+              key={slide.id}
+              className={`slide w-full relative ${
+                currentSlide === index ? "" : "hidden"
+              }`}
+            >
+              <div className={`slide-img ${slide.bgColor} w-full h-full`}></div>
+              <div className="fade absolute top-0 left-0 w-full h-full bg-gradient-to-b from-gray-400 to-black opacity-50"></div>
+            </div>
+          ))}
         </div>
+
+        {showButtons && (
+          <>
+            <button
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-gray-800 text-white rounded-md"
+              onClick={prevSlide}
+            >
+              Anterior
+            </button>
+            <button
+              className="absolute right-0 top-1/2 transform -translate-y-1/2 px-4 py-2 bg-gray-800 text-white rounded-md"
+              onClick={nextSlide}
+            >
+              Próximo
+            </button>
+          </>
+        )}
       </div>
-      <button
-        className="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-l-lg transition-opacity duration-300 opacity-0 hover:opacity-100"
-        onClick={prevSlide}
-      >
-        Previous
-      </button>
-      <button
-        className="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white px-4 py-2 rounded-r-lg transition-opacity duration-300 opacity-0 hover:opacity-100"
-        onClick={nextSlide}
-      >
-        Next
-      </button>
+
+      <div className="manual-navigation gap-4 absolute w-full flex justify-center bottom-10">
+        {slides.map((slide, index) => (
+          <input
+            key={slide.id}
+            type="radio"
+            name="radio-btn"
+            id={`radio${slide.id}`}
+            value={index}
+            className="hidden"
+            checked={currentSlide === index}
+            onChange={() => setCurrentSlide(index)}
+          />
+        ))}
+        {slides.map((slide, index) => (
+          <label
+            key={slide.id}
+            htmlFor={`radio${slide.id}`}
+            className={`manual-btn w-4 h-4 rounded-full border border-pink cursor-pointer transition duration-500 hover:bg-pink ${
+              currentSlide === index ? "bg-pink" : ""
+            }`}
+          ></label>
+        ))}
+      </div>
     </div>
   );
 };
