@@ -1,15 +1,22 @@
 "use client";
-import React, { useRef, useState } from "react";
-// Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-// Import required modules
-import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
+import banner1 from "@/../public/assets/images/Banner1.jpeg";
+import banner2 from "@/../public/assets/images/Banner2.jpg";
+import banner3 from "@/../public/assets/images/banner3.jpg";
+
+import {
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard,
+  Autoplay,
+} from "swiper/modules";
+import Image from "next/image";
 
 export default function App() {
   return (
@@ -21,18 +28,20 @@ export default function App() {
           pagination={true}
           mousewheel={true}
           keyboard={true}
-          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
           className="w-full h-72 swiper"
         >
-          <SwiperSlide className="swiper-slide bg-black">Slide 1</SwiperSlide>
-          <SwiperSlide className="swiper-slide bg-red-500">Slide 2</SwiperSlide>
-          <SwiperSlide className="swiper-slide bg-blue-500">Slide 3</SwiperSlide>
-          <SwiperSlide className="swiper-slide bg-green-500">Slide 4</SwiperSlide>
-          <SwiperSlide className="swiper-slide bg-pink-500">Slide 5</SwiperSlide>
-          <SwiperSlide className="swiper-slide bg-orange-500">Slide 6</SwiperSlide>
-          <SwiperSlide className="swiper-slide">Slide 7</SwiperSlide>
-          <SwiperSlide className="swiper-slide">Slide 8</SwiperSlide>
-          <SwiperSlide className="swiper-slide">Slide 9</SwiperSlide>
+          <SwiperSlide className=" flex items-center swiper-slide bg-black">
+            <div>
+              <Image src={banner1} alt="banner1" />
+            </div>
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide flex h-cover  bg-red-500">
+            <Image src={banner2} alt="banner2" />
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide flex object-fill  bg-blue-500">
+            <Image src={banner3} alt="banner3" />
+          </SwiperSlide>
         </Swiper>
       </div>
     </>
