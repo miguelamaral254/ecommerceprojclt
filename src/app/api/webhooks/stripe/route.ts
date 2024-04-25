@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { stripe } from "@/lib/stripe";
+import { NextResponse } from "next/server";
 import Stripe from "stripe";
 async function handler(request: Request) {
   const body = await request.text();
@@ -28,10 +29,14 @@ async function handler(request: Request) {
       if (typeof charge.payment_intent === "string") {
         const order = await prisma.order.update({
           where: { paymentIntentID: charge.payment_intent },
-          data: { status: "paid" },
+          data: { status: "complete" },
         });
       }
+      break;
+    default:
+      console.log(`Unhandle event type ${event.type}`);
   }
+  return NextResponse.json({}, { status: 200 });
 }
 
 export const GET = handler;
