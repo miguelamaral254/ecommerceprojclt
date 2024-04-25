@@ -28,7 +28,7 @@ export default function Product({ product }: { product: ProductType }) {
   return (
     <button
       onClick={() => handleAddToCart()}
-      className="rounded-md bg-orange-500 text-white px-3.5 py-2.5 text-sm text-center"
+      className="rounded-md bg-orange-500 text-white px-3.5 py-2.5 text-sm text-center hover:bg-orange-400 transition-transform duration-300"
     >
       Add to cart
     </button>
