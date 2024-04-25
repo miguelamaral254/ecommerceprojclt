@@ -21,7 +21,7 @@ import Image from "next/image";
 export default function App() {
   return (
     <>
-      <div className="mt-10 pt-10 h-full">
+      <div className="mt-16 pt-10 h-full">
         <Swiper
           cssMode={true}
           navigation={true}
@@ -29,18 +29,21 @@ export default function App() {
           mousewheel={true}
           keyboard={true}
           modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
-          className="w-full h-72 swiper"
+          className="w-2/3 h-96 swiper"
         >
-          <SwiperSlide className=" flex items-center swiper-slide bg-black">
-            <div>
-              <Image src={banner1} alt="banner1" />
-            </div>
+          <SwiperSlide className="flex items-center swiper-slide object-scale-down bg-black">
+            <Image
+              src={banner1}
+              alt="banner1"
+              layout="fill"
+              objectFit="cover"
+            />
           </SwiperSlide>
-          <SwiperSlide className="swiper-slide flex h-cover  bg-red-500">
-            <Image src={banner2} alt="banner2" />
+          <SwiperSlide className="swiper-slide object-fill w-full bg-red-500">
+            <Image src={banner2} alt="banner2" layout="fill" />
           </SwiperSlide>
-          <SwiperSlide className="swiper-slide flex object-fill  bg-blue-500">
-            <Image src={banner3} alt="banner3" />
+          <SwiperSlide className="swiper-slide flex object-cover bg-blue-500">
+            <Image src={banner3} alt="banner3" layout="fill" objectFit="fill" />
           </SwiperSlide>
         </Swiper>
       </div>
