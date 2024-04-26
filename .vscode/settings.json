@@ -1,22 +1,28 @@
 {
     "cSpell.words": [
+        "Adicionar",
         "autoincrement",
         "clsx",
+        "concluído",
         "datasource",
         "Ecommerce",
         "ecommerceprojclt",
         "filterd",
         "formated",
+        "loja",
         "nextjs",
+        "Pedido",
         "Redir",
         "Senac",
         "senacx",
+        "sucesso",
         "svix",
         "Swal",
         "sweetalert",
         "Swiper",
         "tailwindcss",
-        "trpc"
+        "trpc",
+        "Voltar"
     ],
     "WillLuke.nextjs.addTypesOnSave": true,
     "WillLuke.nextjs.hasPrompted": true

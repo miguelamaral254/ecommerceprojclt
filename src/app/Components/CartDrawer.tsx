@@ -2,73 +2,86 @@
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store";
 import Image from "next/image";
-import CheckoutBtn from "./CheckoutBtn";
+import { motion } from "framer-motion";
+import CheckoutButton from "./CheckoutBtn";
 import Checkout from "./Checkout";
+import OrderCompleted from "./OrderCompleted";
 
 export default function CartDrawer() {
   const useStore = useCartStore();
+
   const totalPrice = useStore.cart.reduce((acc, item) => {
     return acc + item.price! * item.quantity!;
   }, 0);
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={() => useStore.toggleCart()}
+      className="fixed w-full h-screen bg-black/25 left-0 top-0 z-50"
+    >
       <div
-        onClick={() => useStore.toggleCart()}
-        className="fixed w-full h-screen bg-black/25 left-0 top-0 z-50"
+        onClick={(e) => e.stopPropagation()}
+        className="absolute bg-slate-600 right-0 top-0 w-1/3 h-screen p-8 overflow-y-scroll"
       >
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="absolute bg-sky-900 right-0 top-0 w-1/3 h-screen p-12 overflow-y-scroll"
+        <button
+          onClick={() => useStore.toggleCart()}
+          className="font-bold text-sm border border-white py-2 px-3 text-white"
         >
-          <button
-            onClick={() => useStore.toggleCart()}
-            className="font-bold text-sm border border-gray-200 py-2 px-3 text-gray-200"
-          >
-            Go back
-          </button>
-          <div className="border-t border-gray-400 my-4"></div>
-          {useStore.onCheckout === "cart" && (
-            <>
-              {useStore.cart.map((item) => (
-                <div key={item.id} className="flex gap-4 py-4">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={120}
-                    height={120}
-                    className="object-cover w-24"
-                  />
-                  <div>
-                    <h2 className="w-22 truncate">{item.name}</h2>
-                    <h2>Quantity : {item.quantity}</h2>
-                    <p className="text-teal-500 text-sm font-bold">
-                      {formatPrice(item.price)}
-                    </p>
-                    <button
-                      onClick={() => useStore.addProduct(item)}
-                      className="py-1 px-2 border rounded-md mt-2 text-sm mr-1"
-                    >
-                      Add
-                    </button>
-                    <button
-                      onClick={() => useStore.removeFromCart(item)}
-                      className="py-1 px-2 border rounded-md mt-2 text-sm mr-1"
-                    >
-                      Remove
-                    </button>
-                  </div>
+          Back to store
+        </button>
+        <div className="border-t border-gray-400 my-4"></div>
+    
+        {useStore.onCheckout === "cart" && (
+          <>
+            {useStore.cart.map((item) => (
+              <motion.div
+                animate={{ scale: 1, rotateZ: 0, opacity: 0.75 }}
+                initial={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
+                exit={{ scale: 0.5, rotateZ: -10, opacity: 0 }}
+                key={item.id}
+                className="flex gap-4 py-4"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.name}
+                  width={120}
+                  height={120}
+                  className="object-cover w-24"
+                />
+                <div>
+                  <h2 className="w-42 text-white truncate">{item.name}</h2>
+                  <h2>Quantity: {item.quantity}</h2>
+                  <p className="text-teal-600 text-sm font-bold">
+                    {formatPrice(item.price)}
+                  </p>
+                  <button
+                    className="py-1 px-2 border text-white rounded-md mt-2 text-sm mr-1"
+                    onClick={() => useStore.addProduct(item)}
+                  >
+                    Add +
+                  </button>
+                  <button
+                    onClick={() => useStore.removeProduct(item)}
+                    className="py-1 px-2 border text-white rounded-md mt-2 text-sm"
+                  >
+                    Remove -
+                  </button>
                 </div>
-              ))}
-            </>
-          )}
+              </motion.div>
+            ))}
+          </>
+        )}
 
-          {useStore.cart.length > 0 && useStore.onCheckout === "cart" && (
-            <CheckoutBtn totalPrice={totalPrice} />
-          )}
-          {useStore.onCheckout === "checkout" && <Checkout />}
-        </div>
+        {useStore.cart.length > 0 && useStore.onCheckout === "cart" && (
+          <CheckoutButton totalPrice={totalPrice} />
+        )}
+
+        {useStore.onCheckout === "checkout" && <Checkout />}
+        {useStore.onCheckout === "success" && <OrderCompleted />}
       </div>
-    </>
+    </motion.div>
   );
 }

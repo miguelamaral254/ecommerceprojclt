@@ -45,14 +45,15 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
   };
   return (
     <form onSubmit={handleSubmit} id="payment-form">
+      <h1 className="p-4 bold">[test]Please, enter with card number: [4242 4242 4242 4242] </h1>
       <PaymentElement id="payment-element" options={{ layout: "tabs" }} />
       <h1 className="py-4 font-bold">Total: {formattedPrice}</h1>
       <button
         type="submit"
         disabled={!stripe || isLoading}
-        className="bg-teal-600 text-white py-2 px-4 rounded-md"
+        className="bg-gray-200 font-bold border border-orange-600 text-orange-600 py-2 px-4 rounded-md hover:bg-orange-500 hover:text-white"
       >
-        {isLoading ? "Carregando..." : "Finalizar compra"}
+        {isLoading ? "Placing your order..." : "Place order"}
       </button>
     </form>
   );
