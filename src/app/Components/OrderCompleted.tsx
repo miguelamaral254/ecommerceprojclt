@@ -2,12 +2,21 @@
 
 import { useCartStore } from "@/store";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 
 function OrderCompleted() {
   const cartStore = useCartStore();
   useEffect(() => {
     cartStore.setPaymentIntent("");
     cartStore.clearCart();
+
+    Swal.fire({
+      position: "top",
+      icon: "success",
+      title: "Order completed!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   }, []);
 
   return (

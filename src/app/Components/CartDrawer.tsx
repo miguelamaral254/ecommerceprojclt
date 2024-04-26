@@ -35,7 +35,7 @@ export default function CartDrawer() {
         </button>
         <div className="border-t border-gray-400 my-4"></div>
 
-        {useStore.cart.length === 0 ? (
+        {useStore.cart.length === 0 && useStore.onCheckout === "cart" ? (
           <NoItemsMessage />
         ) : (
           <>
