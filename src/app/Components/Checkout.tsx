@@ -4,6 +4,7 @@ import { Elements, PaymentElement } from "@stripe/react-stripe-js";
 import { useCartStore } from "@/store";
 import { useEffect, useState } from "react";
 import CheckoutForm from "./CheckoutForm";
+import LoadingCheckout from "./LoadingCheckout";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
@@ -48,9 +49,7 @@ export default function Checkout() {
           <CheckoutForm clientSecret={clientSecret} />
         </Elements>
       ) : (
-        <div>
-          <h1>Loading...</h1>
-        </div>
+        <LoadingCheckout />
       )}
     </div>
   );

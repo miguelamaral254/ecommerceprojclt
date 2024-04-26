@@ -1,5 +1,4 @@
 "use client";
-
 import { formatPrice } from "@/lib/utils";
 import { useCartStore } from "@/store";
 import {
@@ -43,18 +42,34 @@ function CheckoutForm({ clientSecret }: { clientSecret: string }) {
         setLoading(false);
       });
   };
+
+  const handleCancel = () => {
+    cartStore.setCheckout("cart"); 
+  };
+
   return (
     <form onSubmit={handleSubmit} id="payment-form">
-      <h1 className="p-4 bold">[test]Please, enter with card number: [4242 4242 4242 4242] </h1>
+      <h1 className="p-4 bold">
+        Please, enter card number: [4242 4242 4242 4242]
+      </h1>
       <PaymentElement id="payment-element" options={{ layout: "tabs" }} />
-      <h1 className="py-4 font-bold">Total: {formattedPrice}</h1>
-      <button
-        type="submit"
-        disabled={!stripe || isLoading}
-        className="bg-gray-200 font-bold border border-orange-600 text-orange-600 py-2 px-4 rounded-md hover:bg-orange-500 hover:text-white"
-      >
-        {isLoading ? "Placing your order..." : "Place order"}
-      </button>
+      <h1 className="py-4 font-bold text-teal-400">Total: {formattedPrice}</h1>
+      <div className="flex justify-between items-center">
+        <button
+          type="submit"
+          disabled={!stripe || isLoading}
+          className=" text-white font-bold border bg-orange-500 border-orange-600  py-2 px-4 rounded-md hover:bg-orange-400 hover:text-white"
+        >
+          {isLoading ? "Placing your order..." : "Place order"}
+        </button>
+        <button
+          type="button"
+          onClick={handleCancel}
+          className="bg-red-500 font-bold border border-red-700 text-white py-2 px-4 rounded-md ml-4 hover:bg-red-700"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }

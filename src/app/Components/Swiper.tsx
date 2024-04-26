@@ -17,14 +17,15 @@ import {
 
 export default function App() {
   return (
-    <div className=" mt-16 pt-10">
+    <div className=" mt-16 pt-10 ">
       <Swiper
+        modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
         cssMode={true}
         navigation={true}
         pagination={true}
         mousewheel={true}
         keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
+        autoplay={true}
         className="w-full md:w-2/3 h-96 swiper"
       >
         <SwiperSlide className="flex items-center swiper-slide">
