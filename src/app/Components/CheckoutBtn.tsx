@@ -14,7 +14,7 @@ export default function CheckoutBtn({ totalPrice }: CheckoutBtnProps) {
   const handleCheckout = async () => {
     if (!user) {
       cartStore.toggleCart();
-      router.push('/sign-in?redirectUrl=/');
+      router.push("/sign-in?redirectUrl=/");
       return;
     }
     cartStore.setCheckout("checkout");
@@ -26,7 +26,7 @@ export default function CheckoutBtn({ totalPrice }: CheckoutBtnProps) {
       </p>
       <button
         onClick={() => handleCheckout()}
-        className="w-full rounded-md bg-orange-500   text-white py-2 mt-2"
+        className="w-full rounded-md bg-orange-500 text-white py-2 mt-2  text-sm text-center hover:bg-orange-400 transition-transform duration-300"
       >
         Check out
       </button>
