@@ -8,7 +8,7 @@ import Hydrate from "./Components/Hydrate";
 import Swiper from "./Components/Swiper";
 
 export const metadata: Metadata = {
-  title: "Create Next App",
+  title: "Senac Store",
   description: "Ecommerce Proj Senac",
 };
 const inter = Inter({ subsets: ["latin"] });
