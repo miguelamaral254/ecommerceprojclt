@@ -6,7 +6,7 @@ import { useEffect } from "react";
 function OrderCompleted() {
   const cartStore = useCartStore();
   useEffect(() => {
-    cartStore.setPaymentIntent('');
+    cartStore.setPaymentIntent("");
     cartStore.clearCart();
   }, []);
 
